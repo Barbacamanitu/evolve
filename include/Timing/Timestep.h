@@ -7,7 +7,7 @@
 class Timestep
 {
     public:
-        const float TIMESTEP = 1/60.f;
+        float TIMESTEP;
         Timestep();
         virtual ~Timestep();
         void startLoop();
@@ -18,7 +18,7 @@ class Timestep
         sf::Clock mClock;
         float accumulator;
         float sinceLastUpdate;
-        const int frameSkip = 10;
+        int frameSkip;
 
 
 };

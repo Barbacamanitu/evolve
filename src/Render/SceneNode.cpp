@@ -6,6 +6,8 @@ SceneNode::SceneNode()
 {
     //ctor
     mParent = nullptr;
+	drawChildrenFirst = true;
+	canControl = false;
 }
 
 SceneNode::~SceneNode()

@@ -27,7 +27,7 @@ class SceneNode : public sf::Transformable, private sf::NonCopyable
         //Public Fields
         std::vector<Ptr> mChildren;
         SceneNode* mParent;
-        bool canControl = false;
+        bool canControl;
     protected:
         virtual void drawSelf(sf::RenderTarget& target, sf::RenderStates states, float interpolation){};
         virtual void updateSelf(float dt){};
@@ -35,7 +35,7 @@ class SceneNode : public sf::Transformable, private sf::NonCopyable
         virtual void drawChildren(sf::RenderTarget& target, sf::RenderStates states, float interpolation);
         virtual void updateChildren(float dt);
     private:
-        bool drawChildrenFirst = true;
+        bool drawChildrenFirst;
 
         sf::Transformable previousLocalTransform;
 

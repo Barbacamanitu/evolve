@@ -4,5 +4,5 @@ int main()
     Game game;
     game.createWindow();
     game.mainLoop();
-    return 1;
+    return 0;
 }
