@@ -20,6 +20,7 @@
 					<Add directory="include/Debug" />
 					<Add directory="include/Render" />
 					<Add directory="include/Entity" />
+					<Add directory="include/Config" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics" />
@@ -40,6 +41,7 @@
 					<Add directory="include/Debug" />
 					<Add directory="include/Render" />
 					<Add directory="include/Entity" />
+					<Add directory="include/Config" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -60,16 +62,20 @@
 			<Add directory="C:/Development/SFML-2.1/lib" />
 		</Linker>
 		<Unit filename="cb.bmp" />
+		<Unit filename="include/Config/Configuration.h" />
 		<Unit filename="include/Debug/DebugInfo.h" />
 		<Unit filename="include/Entity/Entity.h" />
 		<Unit filename="include/Game.h" />
+		<Unit filename="include/Math/Conversions.h" />
 		<Unit filename="include/Render/RenderMath.h" />
 		<Unit filename="include/Render/SceneNode.h" />
 		<Unit filename="include/Timing/Timestep.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Config/Configuration.cpp" />
 		<Unit filename="src/Debug/DebugInfo.cpp" />
 		<Unit filename="src/Entity/Entity.cpp" />
 		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/Math/Conversions.cpp" />
 		<Unit filename="src/Render/RenderMath.cpp" />
 		<Unit filename="src/Render/SceneNode.cpp" />
 		<Unit filename="src/Timing/Timestep.cpp" />
