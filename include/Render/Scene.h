@@ -1,15 +1,8 @@
-#ifndef SCENE_H
-#define SCENE_H
-#include "SceneNode.h"
-
+#pragma once
 class Scene
 {
-    public:
-        Scene();
-        virtual ~Scene();
-    protected:
-    private:
-
+public:
+	Scene(void);
+	~Scene(void);
 };
 
-#endif // SCENE_H

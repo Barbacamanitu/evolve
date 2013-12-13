@@ -1,11 +1,11 @@
 #include "Scene.h"
 
-Scene::Scene()
+
+Scene::Scene(void)
 {
-    //ctor
 }
 
-Scene::~Scene()
+
+Scene::~Scene(void)
 {
-    //dtor
 }

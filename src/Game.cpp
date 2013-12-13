@@ -1,8 +1,8 @@
 #include "Game.h"
-#include <Entity/Entity.h>
 Game::Game()
 {
     //ctors
+	oldMouse = sf::Mouse::getPosition();
 }
 
 Game::~Game()
@@ -12,33 +12,17 @@ Game::~Game()
 
 void Game::createWindow()
 {
-    gameWindow.create(sf::VideoMode(1280, 720), "SFML window");
+    gameWindow.create(sf::VideoMode(800, 800), "SFML window");
     gameWindow.setVerticalSyncEnabled(false);
+	mainView.setCenter(sf::Vector2f(0.f,0.f));
+	mainView.setSize(10.f,10.f);
+	gameWindow.setView(mainView);
+}
 
-
-    Entity::Ptr mainEntity(new Entity());
-    mainEntity->canControl = true;
-    sf::Vector2f mSize(50.f,50.f);
-    sf::Vector2f xSize(20.f,20.f);
-
-    sf::RectangleShape mRect(mSize);
-    sf::RectangleShape xRect(xSize);
-
-    mRect.setOrigin(mSize/2.f);
-    xRect.setOrigin(xSize/2.f);
-
-    mRect.setFillColor(sf::Color::Cyan);
-    xRect.setFillColor(sf::Color::Red);
-
-    mainEntity->rectangle = mRect;
-
-    Entity::Ptr xEntity(new Entity());
-    xEntity->rectangle = xRect;
-
-    xEntity->move(50.f,50.f);
-    mainEntity->attachChild(std::move(xEntity));
-    graph.attachChild(std::move(mainEntity));
-    graph.move(gameWindow.getDefaultView().getCenter());
+void Game::createWorld()
+{
+	b2Vec2 grav = b2Vec2(0,0);
+	world = new b2World(grav);
 }
 
 void Game::mainLoop()
@@ -63,18 +47,42 @@ void Game::render(const float alpha)
 {
     gameWindow.clear();
     sf::RenderStates states;
-    gameWindow.draw(debugInfo);
-    graph.draw(gameWindow,states,alpha);
-    gameWindow.display();
+	gameWindow.setView(mainView);
+
+
+
+	gameWindow.setView(gameWindow.getDefaultView());
+	gameWindow.draw(debugInfo);
     debugInfo.updateFPS();
+
+
+	gameWindow.display();
 
 }
 
 void Game::update(const float dt)
 {
-    debugInfo.update(gameWindow);
-    graph.update(dt);
 
+	int32 velocityIterations = 8;   //how strongly to correct velocity
+    int32 positionIterations = 3;  
+	world->Step( dt, velocityIterations, positionIterations);
+	debugInfo.update(gameWindow);
+   
+	sf::Vector2i newMouse = sf::Mouse::getPosition(gameWindow);
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				{
+					//Pan View
+					
+					sf::Vector2i difference = (oldMouse - newMouse);
+					sf::Vector2f amount = sf::Vector2f(difference.x,difference.y);
+					amount = amount * (mainView.getSize().x/400.f);
+					
+
+					mainView.move(amount.x,amount.y);
+		
+				}
+
+	oldMouse = newMouse;
 }
 
 
@@ -93,5 +101,19 @@ void Game::processEvents()
             {
 
             }
+			if (event.type == sf::Event::EventType::MouseWheelMoved)
+			{
+				int maxDelta = 5;
+				int delta = event.mouseWheel.delta;
+				float speed = 1.5;
+				float movement = 0.0f;
+				if (delta > 0)
+					movement = 1/speed;
+				if (delta < 0)
+					movement = speed/1;				
+				mainView.zoom(movement);
+			}
+		
+
         }
 }

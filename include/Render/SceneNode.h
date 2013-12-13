@@ -1,46 +1,24 @@
 #ifndef SCENENODE_H
 #define SCENENODE_H
-#include <SFML/Graphics.hpp>
 #include <memory>
-
-class Transform;
-
-class SceneNode : public sf::Transformable, private sf::NonCopyable
+#include <SFML/Graphics.hpp>
+class Game;
+class SceneNode
 {
-    public:
-        typedef std::unique_ptr<SceneNode> Ptr;
+public:
+	SceneNode(void);
+	~SceneNode(void);
+	typedef std::unique_ptr<SceneNode> Ptr;
+	virtual void Render(sf::RenderTarget &target,Game &game,float interpolation){};
+	virtual void Update(float delta){};
 
-        SceneNode();
-        virtual ~SceneNode();
+	void AttachChild(Ptr child);
+	Ptr  DetachChild(const SceneNode& node);
 
-        //Public Methods
-        virtual void draw(sf::RenderTarget &target, sf::RenderStates states, float interpolation);
-        virtual void update(float dt);
+	//Public Fields
+	std::vector<Ptr> mChildren;
+	SceneNode*       mParent;
 
-        sf::Transform getWorldTransform() const;
-        sf::Vector2f getWorldPosition() const;
-
-        //Children
-        void attachChild(Ptr child);
-        Ptr detachChild(const SceneNode &node);
-
-        //Public Fields
-        std::vector<Ptr> mChildren;
-        SceneNode* mParent;
-        bool canControl;
-    protected:
-        virtual void drawSelf(sf::RenderTarget& target, sf::RenderStates states, float interpolation){};
-        virtual void updateSelf(float dt){};
-
-        virtual void drawChildren(sf::RenderTarget& target, sf::RenderStates states, float interpolation);
-        virtual void updateChildren(float dt);
-    private:
-        bool drawChildrenFirst;
-
-        sf::Transformable previousLocalTransform;
-
-        sf::Transform getInterpolatedTransform(float interpolation);
-        void updateWorldTransform();
 };
+#endif
 
-#endif // SCENENODE_H

@@ -59,7 +59,7 @@ std::string DebugInfo::getMouseString(sf::RenderWindow & window)
 {
     sf::Vector2i mPos = sf::Mouse::getPosition(window);
     char buffer[50];
-    sprintf(buffer,"X: %d,Y: %d",mPos.x,mPos.y);
+    sprintf_s(buffer,"X: %d,Y: %d",mPos.x,mPos.y);
     std::string mPosStr(buffer);
     return mPosStr;
 }
@@ -67,7 +67,7 @@ std::string DebugInfo::getMouseString(sf::RenderWindow & window)
 std::string DebugInfo::getFPSString()
 {
     char buf[50];
-    sprintf(buf,"FPS: %d",FPS);
+    sprintf_s(buf,"FPS: %d",FPS);
     std::string fpsStr(buf);
     return fpsStr;
 }
@@ -75,7 +75,7 @@ std::string DebugInfo::getFPSString()
 std::string DebugInfo::getUPSString()
 {
     char buf[50];
-    sprintf(buf,"UPS: %d",UPS);
+    sprintf_s(buf,"UPS: %d",UPS);
     std::string fpsStr(buf);
     return fpsStr;
 }

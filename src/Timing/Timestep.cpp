@@ -5,7 +5,7 @@ Timestep::Timestep()
 {
     //ctor
     accumulator = 0;
-	TIMESTEP = 1/60.f;
+	TIMESTEP = 1/30.f;
 	frameSkip = 10;
 }
 

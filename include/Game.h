@@ -4,7 +4,9 @@
 #include <Timing/Timestep.h>
 #include <SFML/Graphics.hpp>
 #include <Debug/DebugInfo.h>
-#include <Render/SceneNode.h>
+//#include <Render/SceneNode.h>
+#include <Box2D/Box2D.h>
+#include <SceneNode.h>
 
 class Game
 {
@@ -16,15 +18,19 @@ class Game
         void mainLoop();
         void update(const float dt);
         void render(const float alpha);
+		void createWorld();
+		b2World* world;
+
     protected:
     private:
         sf::RenderWindow gameWindow;
         Timestep mTimestep;
         void processEvents();
         DebugInfo debugInfo;
-        SceneNode graph;
-
-
+		sf::Vector2i oldMouse;
+		sf::View mainView;
+		SceneNode
+		
 
 };
 

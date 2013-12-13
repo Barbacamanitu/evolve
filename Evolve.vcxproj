@@ -48,14 +48,14 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Development\SFML-2.1-msvc\SFML-2.1\include;include;include\Config;include\Entity;include\Math;include\Render;include\Timing;include\Debug;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Development\SFML-2.1-msvc\SFML-2.1\include;include;include\Config;include\GameObject;include\Math;include\Render;include\Timing;include\Debug;C:\Development\Box2D_v2.3.0\Box2D;include\Physics</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Development\SFML-2.1-msvc\SFML-2.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-window-s-d.lib;sfml-graphics-s-d.lib;sfml-system-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Development\SFML-2.1-msvc\SFML-2.1\lib;C:\Development\Box2D_v2.3.0\Box2D\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D-d.lib;sfml-window-s-d.lib;sfml-graphics-s-d.lib;sfml-system-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,33 +71,35 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sfml-window-s.lib;sfml-graphics-s.lib;sfml-system-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Box2D.lib;sfml-window-s.lib;sfml-graphics-s.lib;sfml-system-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\config\Configuration.cpp" />
     <ClCompile Include="src\debug\DebugInfo.cpp" />
-    <ClCompile Include="src\entity\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\math\Conversions.cpp" />
+    <ClCompile Include="src\Organism\Bodypart.cpp" />
     <ClCompile Include="src\render\RenderMath.cpp" />
-    <ClCompile Include="src\render\Scene.cpp" />
-    <ClCompile Include="src\render\SceneNode.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Development\SFML-2.1-msvc\SFML-2.1\include;include;include\Render;include\Config;include\Render;include\Entity;include\Timing;include\Math;include\Debug</AdditionalIncludeDirectories>
-    </ClCompile>
+    <ClCompile Include="src\Render\Scene.cpp" />
+    <ClCompile Include="src\Render\SceneNode.cpp" />
     <ClCompile Include="src\timing\Timestep.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\config\Configuration.h" />
     <ClInclude Include="include\debug\DebugInfo.h" />
-    <ClInclude Include="include\entity\Entity.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\math\Conversions.h" />
+    <ClInclude Include="include\Organism\Bodypart.h" />
     <ClInclude Include="include\render\RenderMath.h" />
-    <ClInclude Include="include\render\Scene.h" />
-    <ClInclude Include="include\render\SceneNode.h" />
+    <ClInclude Include="include\Render\Scene.h" />
+    <ClInclude Include="include\Render\SceneNode.h" />
     <ClInclude Include="include\timing\Timestep.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Evolve.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
