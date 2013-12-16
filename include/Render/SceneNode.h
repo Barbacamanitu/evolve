@@ -9,8 +9,8 @@ public:
 	SceneNode(void);
 	~SceneNode(void);
 	typedef std::unique_ptr<SceneNode> Ptr;
-	virtual void Render(sf::RenderTarget &target,Game &game,float interpolation){};
-	virtual void Update(float delta){};
+	void Render(sf::RenderTarget &target,Game &game,float interpolation);
+	void Update(float delta);
 
 	void AttachChild(Ptr child);
 	Ptr  DetachChild(const SceneNode& node);
@@ -18,6 +18,13 @@ public:
 	//Public Fields
 	std::vector<Ptr> mChildren;
 	SceneNode*       mParent;
+protected:
+    virtual void RenderSelf(sf::RenderTarget &target,Game &game,float interpolation){};
+    virtual void UpdateSelf(float delta){};
+
+private:
+    void RenderChildren(sf::RenderTarget &target,Game &game,float interpolation);
+    void UpdateChildren(float delta);
 
 };
 #endif

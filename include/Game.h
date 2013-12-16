@@ -29,8 +29,9 @@ class Game
         DebugInfo debugInfo;
 		sf::Vector2i oldMouse;
 		sf::View mainView;
-		SceneNode
-		
+
+        SceneNode SceneGraph;
+
 
 };
 

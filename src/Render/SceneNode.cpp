@@ -26,3 +26,31 @@ SceneNode::Ptr SceneNode::DetachChild(const SceneNode& node)
     mChildren.erase(found);
     return result;
 }
+
+void SceneNode::Render(sf::RenderTarget &target,Game &game,float interpolation)
+{
+    RenderChildren(target,game,interpolation);
+    RenderSelf(target,game,interpolation);
+}
+
+void SceneNode::RenderChildren(sf::RenderTarget &target,Game &game,float interpolation)
+{
+    for (const Ptr& node : mChildren)
+    {
+        node->Render(target,game,interpolation);
+    }
+}
+
+void SceneNode::Update(float delta)
+{
+    UpdateChildren(delta);
+    UpdateSelf(delta);
+}
+
+void SceneNode::UpdateChildren(float delta)
+{
+    for (const Ptr& node : mChildren)
+    {
+        node->Update(delta);
+    }
+}

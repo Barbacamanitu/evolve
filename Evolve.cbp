@@ -14,18 +14,8 @@
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
-					<Add directory="include" />
-					<Add directory="include/Physics" />
-					<Add directory="include/Timing" />
-					<Add directory="include/Debug" />
-					<Add directory="include/Render" />
-					<Add directory="include/Entity" />
+					<Add directory="include/Organism" />
 				</Compiler>
-				<Linker>
-					<Add library="sfml-graphics" />
-					<Add library="sfml-window" />
-					<Add library="sfml-system" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Evolve" prefix_auto="1" extension_auto="1" />
@@ -34,43 +24,50 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add directory="include" />
-					<Add directory="include/Physics" />
-					<Add directory="include/Timing" />
-					<Add directory="include/Debug" />
-					<Add directory="include/Render" />
-					<Add directory="include/Entity" />
+					<Add directory="include/Organism" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="sfml-graphics" />
-					<Add library="sfml-window" />
-					<Add library="sfml-system" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add directory="C:/Development/SFML-2.1/include" />
+			<Add directory="/home/russ/dev/lib/Box2D_v2.3.0/Box2D" />
+			<Add directory="include" />
+			<Add directory="include/Physics" />
+			<Add directory="include/Timing" />
+			<Add directory="include/Debug" />
+			<Add directory="include/Render" />
+			<Add directory="include/Entity" />
+			<Add directory="include/Organism" />
 		</Compiler>
 		<Linker>
 			<Add library="sfml-graphics" />
 			<Add library="sfml-window" />
 			<Add library="sfml-system" />
+			<Add library="/home/russ/dev/lib/Box2D_v2.3.0/Box2D/Build/codeblocks/Box2D/libBox2D.a" />
 			<Add directory="C:/Development/SFML-2.1/lib" />
+			<Add directory="/home/russ/dev/lib/Box2D_v2.3.0/Box2D/Build/codeblocks/Box2D" />
 		</Linker>
-		<Unit filename="cb.bmp" />
 		<Unit filename="include/Debug/DebugInfo.h" />
 		<Unit filename="include/Entity/Entity.h" />
 		<Unit filename="include/Game.h" />
+		<Unit filename="include/Organism/Bodypart.h" />
+		<Unit filename="include/Organism/Organism.h" />
 		<Unit filename="include/Render/RenderMath.h" />
+		<Unit filename="include/Render/Scene.h" />
 		<Unit filename="include/Render/SceneNode.h" />
 		<Unit filename="include/Timing/Timestep.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="resource.h" />
 		<Unit filename="src/Debug/DebugInfo.cpp" />
-		<Unit filename="src/Entity/Entity.cpp" />
 		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/Organism/Bodypart.cpp" />
+		<Unit filename="src/Organism/Organism.cpp" />
 		<Unit filename="src/Render/RenderMath.cpp" />
+		<Unit filename="src/Render/Scene.cpp" />
 		<Unit filename="src/Render/SceneNode.cpp" />
 		<Unit filename="src/Timing/Timestep.cpp" />
 		<Extensions>

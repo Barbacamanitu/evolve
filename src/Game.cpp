@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <Organism/Organism.h>
 Game::Game()
 {
     //ctors
@@ -23,6 +24,9 @@ void Game::createWorld()
 {
 	b2Vec2 grav = b2Vec2(0,0);
 	world = new b2World(grav);
+    Organism::Ptr newOrganism(new Organism());
+    newOrganism->Dummy((*world));
+    SceneGraph.AttachChild(std::move(newOrganism));
 }
 
 void Game::mainLoop()
@@ -49,12 +53,12 @@ void Game::render(const float alpha)
     sf::RenderStates states;
 	gameWindow.setView(mainView);
 
+    SceneGraph.Render(gameWindow,(*this),alpha);
 
 
 	gameWindow.setView(gameWindow.getDefaultView());
 	gameWindow.draw(debugInfo);
     debugInfo.updateFPS();
-
 
 	gameWindow.display();
 
@@ -64,24 +68,32 @@ void Game::update(const float dt)
 {
 
 	int32 velocityIterations = 8;   //how strongly to correct velocity
-    int32 positionIterations = 3;  
+    int32 positionIterations = 3;
 	world->Step( dt, velocityIterations, positionIterations);
 	debugInfo.update(gameWindow);
-   
+
 	sf::Vector2i newMouse = sf::Mouse::getPosition(gameWindow);
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				{
 					//Pan View
-					
+
 					sf::Vector2i difference = (oldMouse - newMouse);
 					sf::Vector2f amount = sf::Vector2f(difference.x,difference.y);
 					amount = amount * (mainView.getSize().x/400.f);
-					
+
 
 					mainView.move(amount.x,amount.y);
-		
-				}
 
+				}
+				float movement = 1.0;
+
+				float d = 0.f;
+
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+					mainView.zoom(1.2f);
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+					mainView.zoom(0.8f);
 	oldMouse = newMouse;
 }
 
@@ -110,10 +122,10 @@ void Game::processEvents()
 				if (delta > 0)
 					movement = 1/speed;
 				if (delta < 0)
-					movement = speed/1;				
+					movement = speed/1;
 				mainView.zoom(movement);
 			}
-		
+
 
         }
 }

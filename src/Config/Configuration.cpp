@@ -1,4 +1,4 @@
-#include "Configuration.h"
+\
 #include <string>
 #include <Math/Conversions.h>
 Configuration::Configuration()
