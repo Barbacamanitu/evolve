@@ -1,5 +1,6 @@
- #include "DebugInfo.h"
+#include <Debug/DebugInfo.h>
 #include <stdio.h>
+#include <Box2D\Box2D.h>
 DebugInfo::DebugInfo()
 {
     //ctor
@@ -83,4 +84,43 @@ std::string DebugInfo::getUPSString()
 void DebugInfo::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(debugText_,states);
+}
+
+void DebugInfo::RenderJoints(sf::RenderTarget & target, sf::RenderStates states,b2World* world)
+{
+	float rad = .1f;
+	sf::CircleShape circle;
+	circle.setRadius(rad);
+	circle.setOrigin(rad,rad);
+	std::vector<sf::Color> colors;
+	colors.push_back(sf::Color::White);
+	colors.push_back(sf::Color::Green);
+	colors.push_back(sf::Color::Yellow);
+	colors.push_back(sf::Color::Cyan);
+
+	
+
+
+
+
+	/*b2Body* joints = world->GetBodyList();
+	for (int i = 0; i < world->GetBodyCount()-1; i++)
+	{
+		int cI = i % colors.size();
+		circle.setFillColor(colors[cI]);
+
+		joints[i].ApplyTorque(((rand() % 10) - 5) * .5f,false);
+
+		//b2Vec2 jPosB = joints[i].GetAnchorB();
+		
+
+		///circle.setPosition(jPosA.x,jPosA.y);
+		target.draw(circle,states);
+		//circle.setPosition(jPosB.x,jPosB.y);
+	
+		target.draw(circle,states);
+
+		
+
+	}*/
 }

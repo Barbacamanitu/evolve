@@ -1,4 +1,4 @@
-#include "SceneNode.h"
+#include <Render/SceneNode.h>
 #include <assert.h>
 
 SceneNode::SceneNode(void)

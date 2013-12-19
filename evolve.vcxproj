@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{41EA000A-69D9-4CB9-BB8D-EF7393EB0DCA}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>SFML_STATIC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\Development\SFML-2.1-msvc\SFML-2.1\include;C:\Development\Box2D_v2.3.0\Box2D;include;include\Timing;include\Render;include\Organism;include\Math;include\Debug</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>C:\Development\Box2D_v2.3.0\Box2D\Build\vs2012\bin\Debug;C:\Development\SFML-2.1-msvc\SFML-2.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio-s-d.lib;sfml-window-s-d.lib;sfml-graphics-s-d.lib;sfml-system-s-d.lib;sfml-network-s-d.lib;Box2D-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>C:\Development\SFML-2.1-msvc\SFML-2.1\include;C:\Development\Box2D_v2.3.0\Box2D;include;include\Timing;include\Render;include\Organism;include\Math;include\Debug</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Development\Box2D_v2.3.0\Box2D\Build\vs2012\bin\Release;C:\Development\SFML-2.1-msvc\SFML-2.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio-s;sfml-window-s;sfml-graphics-s;sfml-system-s;sfml-network-s;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\debug\DebugInfo.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\math\Conversions.cpp" />
+    <ClCompile Include="src\Math\Vec2.cpp" />
+    <ClCompile Include="src\organism\Bodypart.cpp" />
+    <ClCompile Include="src\Organism\BodypartCircle.cpp" />
+    <ClCompile Include="src\Organism\BodypartDefinition.cpp" />
+    <ClCompile Include="src\Organism\BodypartFactory.cpp" />
+    <ClCompile Include="src\Organism\BodypartRectangle.cpp" />
+    <ClCompile Include="src\Organism\JointDefinition.cpp" />
+    <ClCompile Include="src\organism\Organism.cpp" />
+    <ClCompile Include="src\render\RenderMath.cpp" />
+    <ClCompile Include="src\render\Scene.cpp" />
+    <ClCompile Include="src\render\SceneNode.cpp" />
+    <ClCompile Include="src\timing\Timestep.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\config\Configuration.h" />
+    <ClInclude Include="include\debug\DebugInfo.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\math\Conversions.h" />
+    <ClInclude Include="include\Math\eMath.h" />
+    <ClInclude Include="include\Math\Vec2.h" />
+    <ClInclude Include="include\organism\Bodypart.h" />
+    <ClInclude Include="include\Organism\BodypartCircle.h" />
+    <ClInclude Include="include\Organism\BodypartDefinition.h" />
+    <ClInclude Include="include\Organism\BodypartFactory.h" />
+    <ClInclude Include="include\Organism\BodypartRectangle.h" />
+    <ClInclude Include="include\Organism\JointDefinition.h" />
+    <ClInclude Include="include\organism\Organism.h" />
+    <ClInclude Include="include\render\RenderMath.h" />
+    <ClInclude Include="include\render\Scene.h" />
+    <ClInclude Include="include\render\SceneNode.h" />
+    <ClInclude Include="include\timing\Timestep.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -13,6 +13,7 @@ Game::~Game()
 
 void Game::createWindow()
 {
+
     gameWindow.create(sf::VideoMode(800, 800), "SFML window");
     gameWindow.setVerticalSyncEnabled(false);
 	mainView.setCenter(sf::Vector2f(0.f,0.f));
@@ -54,7 +55,7 @@ void Game::render(const float alpha)
 	gameWindow.setView(mainView);
 
     SceneGraph.Render(gameWindow,(*this),alpha);
-
+	debugInfo.RenderJoints(gameWindow,states,world);
 
 	gameWindow.setView(gameWindow.getDefaultView());
 	gameWindow.draw(debugInfo);

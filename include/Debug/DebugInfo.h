@@ -2,7 +2,7 @@
 #define DEBUGINFO_H
 
 #include <SFML/Graphics.hpp>
-
+class b2World;
 class DebugInfo : public sf::Drawable
 {
     public:
@@ -11,6 +11,7 @@ class DebugInfo : public sf::Drawable
         void draw(sf::RenderTarget & target, sf::RenderStates) const;
         void update(sf::RenderWindow & window);
         void updateFPS();
+		void RenderJoints(sf::RenderTarget & target, sf::RenderStates states,b2World* world);
     protected:
     private:
         sf::Text debugText_;
