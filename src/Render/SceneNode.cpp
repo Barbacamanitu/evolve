@@ -3,11 +3,32 @@
 
 SceneNode::SceneNode(void)
 {
+	mParent = nullptr;
 }
 
 
 SceneNode::~SceneNode(void)
 {
+}
+
+sf::Transform SceneNode::getWorldTransform() const
+{
+    sf::Transform transform = sf::Transform::Identity;
+
+    for (const SceneNode* node = this;node != nullptr; node = node->mParent)
+    transform = node->getTransform() * transform;
+
+  return transform;
+}
+
+sf::FloatRect SceneNode::getBoundingRect() const
+{
+    return sf::FloatRect(0.f,0.f,0.f,0.f);
+}
+
+sf::Vector2f SceneNode::getWorldPosition() const
+{
+    return getWorldTransform() * sf::Vector2f();
 }
 
 void SceneNode::AttachChild(Ptr child)

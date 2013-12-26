@@ -19,9 +19,8 @@ class Game
         void update(const float dt);
         void render(const float alpha);
 		void createWorld();
-		b2World* world;
 		Bone* newBone;
-
+		sf::Texture* skinTexture;
     protected:
     private:
         sf::RenderWindow gameWindow;

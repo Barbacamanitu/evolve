@@ -27,12 +27,6 @@
     <ClCompile Include="src\math\Conversions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\organism\Bodypart.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\organism\Organism.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\render\RenderMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,22 +39,16 @@
     <ClCompile Include="src\timing\Timestep.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Organism\BodypartDefinition.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Math\Vec2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Organism\BodypartRectangle.cpp">
+    <ClCompile Include="src\Organism\Bone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Organism\JointDefinition.cpp">
+    <ClCompile Include="src\Organism\Hub.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Organism\BodypartFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Organism\BodypartCircle.cpp">
+    <ClCompile Include="src\Organism\SkeletalComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,12 +65,6 @@
     <ClInclude Include="include\math\Conversions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\organism\Bodypart.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\organism\Organism.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\render\RenderMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -95,25 +77,19 @@
     <ClInclude Include="include\timing\Timestep.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Organism\BodypartDefinition.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Math\Vec2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Organism\BodypartRectangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Math\eMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Organism\JointDefinition.h">
+    <ClInclude Include="include\Organism\Bone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Organism\BodypartFactory.h">
+    <ClInclude Include="include\Organism\Hub.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Organism\BodypartCircle.h">
+    <ClInclude Include="include\Organism\SkeletalComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

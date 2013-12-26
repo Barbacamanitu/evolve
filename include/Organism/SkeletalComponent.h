@@ -33,6 +33,7 @@ class SkeletalComponent : public SceneNode
     public:
         SkeletalComponent();
         virtual ~SkeletalComponent();
+		virtual void AttachSkin(float thickness){};
 
     protected:
     private:

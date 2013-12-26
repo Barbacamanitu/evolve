@@ -1,10 +1,15 @@
 #include "Game.h"
-#include <Organism/Organism.h>
 #include <memory>
+#include <Organism/Hub.h>
 Game::Game()
 {
     //ctors
 	oldMouse = sf::Mouse::getPosition();
+	skinTexture = new sf::Texture();
+	if (!skinTexture->loadFromFile("skin.jpg"))
+	{
+		int a =1;
+	}
 }
 
 Game::~Game()
@@ -24,10 +29,16 @@ void Game::createWindow()
 
 void Game::createWorld()
 {
-	b2Vec2 grav = b2Vec2(0,0);
-	world = new b2World(grav);
+	
 
-	newBone = new Bone(10.f,0.f,evolve::Vec2(0,50));
+	
+
+	Bone::Ptr aArm(new Bone(5.f,0.f,80.f));
+	aArm->AttachSkin(5.f
+	
+
+
+	SceneGraph.AttachChild(std::move(bArm));
 
 }
 
@@ -56,7 +67,6 @@ void Game::render(const float alpha)
 	gameWindow.setView(mainView);
     //newBone->Render(gameWindow,states,(*this),0.f);
     SceneGraph.Render(gameWindow,states,(*this),alpha);
-	debugInfo.RenderJoints(gameWindow,states,world);
 
 	gameWindow.setView(gameWindow.getDefaultView());
 	gameWindow.draw(debugInfo);
@@ -70,7 +80,7 @@ void Game::update(const float dt)
 
 	int32 velocityIterations = 8;   //how strongly to correct velocity
     int32 positionIterations = 3;
-	world->Step( dt, velocityIterations, positionIterations);
+	//world->Step( dt, velocityIterations, positionIterations);
 	debugInfo.update(gameWindow);
 
 	sf::Vector2i newMouse = sf::Mouse::getPosition(gameWindow);
@@ -96,6 +106,9 @@ void Game::update(const float dt)
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
 					mainView.zoom(0.8f);
 	oldMouse = newMouse;
+
+
+	SceneGraph.Update(dt);
 }
 
 
