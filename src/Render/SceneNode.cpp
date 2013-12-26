@@ -27,17 +27,19 @@ SceneNode::Ptr SceneNode::DetachChild(const SceneNode& node)
     return result;
 }
 
-void SceneNode::Render(sf::RenderTarget &target,Game &game,float interpolation)
+void SceneNode::Render(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation)
 {
-    RenderChildren(target,game,interpolation);
-    RenderSelf(target,game,interpolation);
+
+    states.transform *= getTransform();
+    RenderChildren(target,states,game,interpolation);
+    RenderSelf(target,states,game,interpolation);
 }
 
-void SceneNode::RenderChildren(sf::RenderTarget &target,Game &game,float interpolation)
+void SceneNode::RenderChildren(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation)
 {
     for (const Ptr& node : mChildren)
     {
-        node->Render(target,game,interpolation);
+        node->Render(target,states,game,interpolation);
     }
 }
 

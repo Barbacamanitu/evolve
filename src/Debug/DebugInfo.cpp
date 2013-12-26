@@ -1,6 +1,6 @@
 #include <Debug/DebugInfo.h>
 #include <stdio.h>
-#include <Box2D\Box2D.h>
+#include <Box2D/Box2D.h>
 DebugInfo::DebugInfo()
 {
     //ctor
@@ -98,7 +98,7 @@ void DebugInfo::RenderJoints(sf::RenderTarget & target, sf::RenderStates states,
 	colors.push_back(sf::Color::Yellow);
 	colors.push_back(sf::Color::Cyan);
 
-	
+
 
 
 
@@ -112,15 +112,15 @@ void DebugInfo::RenderJoints(sf::RenderTarget & target, sf::RenderStates states,
 		joints[i].ApplyTorque(((rand() % 10) - 5) * .5f,false);
 
 		//b2Vec2 jPosB = joints[i].GetAnchorB();
-		
+
 
 		///circle.setPosition(jPosA.x,jPosA.y);
 		target.draw(circle,states);
 		//circle.setPosition(jPosB.x,jPosB.y);
-	
+
 		target.draw(circle,states);
 
-		
+
 
 	}*/
 }

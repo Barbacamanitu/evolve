@@ -3,13 +3,13 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 class Game;
-class SceneNode
+class SceneNode : public sf::Transformable
 {
 public:
 	SceneNode(void);
 	~SceneNode(void);
 	typedef std::unique_ptr<SceneNode> Ptr;
-	void Render(sf::RenderTarget &target,Game &game,float interpolation);
+	void Render(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation);
 	void Update(float delta);
 
 	void AttachChild(Ptr child);
@@ -19,11 +19,11 @@ public:
 	std::vector<Ptr> mChildren;
 	SceneNode*       mParent;
 protected:
-    virtual void RenderSelf(sf::RenderTarget &target,Game &game,float interpolation){};
+    virtual void RenderSelf(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation){};
     virtual void UpdateSelf(float delta){};
 
 private:
-    void RenderChildren(sf::RenderTarget &target,Game &game,float interpolation);
+    void RenderChildren(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation);
     void UpdateChildren(float delta);
 
 };

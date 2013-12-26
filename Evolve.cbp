@@ -66,8 +66,6 @@
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Organism/Bodypart.cpp" />
 		<Unit filename="src/Organism/Organism.cpp" />
-		<Unit filename="src/Render/RenderMath.cpp" />
-		<Unit filename="src/Render/Scene.cpp" />
 		<Unit filename="src/Render/SceneNode.cpp" />
 		<Unit filename="src/Timing/Timestep.cpp" />
 		<Extensions>

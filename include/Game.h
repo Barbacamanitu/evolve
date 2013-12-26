@@ -7,7 +7,7 @@
 //#include <Render/SceneNode.h>
 #include <Box2D/Box2D.h>
 #include <SceneNode.h>
-
+#include <Bone.h>
 class Game
 {
     public:
@@ -20,6 +20,7 @@ class Game
         void render(const float alpha);
 		void createWorld();
 		b2World* world;
+		Bone* newBone;
 
     protected:
     private:

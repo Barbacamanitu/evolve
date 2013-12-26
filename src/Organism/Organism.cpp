@@ -22,7 +22,7 @@ BodypartDefinition Organism::randDef()
 	if (rand() % 2 == 1)
 		bDef.SetShape(BodypartDefinition::Shape::Rectangle);
 	evolve::Vec2 mSize = evolve::Vec2((rand() % 300)+80,(rand() % 300)+80) * .01f;
-	
+
 	bDef.Size(mSize);
 	bDef.Radius(mSize.X/2.f);
 	sf::Color c;
@@ -44,41 +44,8 @@ BodypartDefinition Organism::randDef()
 	return bDef;
 }
 
-void Organism::Dummy(b2World& world)
-{
-	BodypartDefinition mainDef;
-	mainDef.Color(sf::Color::Transparent);
-	mainDef.Size(evolve::Vec2(0.0001f,0.0001f));
-	for (int i = 0; i < (rand() % 20) + 10; i++)
-	{
-		BodypartDefinition &bA = randDef();
-		for (int x = 0; i < (rand() % 30) + 10; i++)
-		{
-			BodypartDefinition &bB = randDef();
-			for (int y = 0; i < (rand() % 50) + 10; i++)
-			{
-				BodypartDefinition &bC = randDef();
-
-				bB.mChildNodes.push_back(bC);
-			}
-			bA.mChildNodes.push_back(bB);
-
-			
-			//Add B to A
-		}
-		//A has lots of B's. Do something with A.
-		mainDef.mChildNodes.push_back(bA);
-	}
-
-
-
-
-	AttachChild(BodypartFactory::CreateBodypart(mainDef,&world));
-
-
-}
 
 void Organism::UpdateSelf(float dt)
 {
-	
+
 }

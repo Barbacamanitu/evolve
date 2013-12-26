@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <Organism/Organism.h>
+#include <memory>
 Game::Game()
 {
     //ctors
@@ -25,9 +26,9 @@ void Game::createWorld()
 {
 	b2Vec2 grav = b2Vec2(0,0);
 	world = new b2World(grav);
-    Organism::Ptr newOrganism(new Organism());
-    newOrganism->Dummy((*world));
-    SceneGraph.AttachChild(std::move(newOrganism));
+
+	newBone = new Bone(10.f,0.f,evolve::Vec2(0,50));
+
 }
 
 void Game::mainLoop()
@@ -53,14 +54,13 @@ void Game::render(const float alpha)
     gameWindow.clear();
     sf::RenderStates states;
 	gameWindow.setView(mainView);
-
-    SceneGraph.Render(gameWindow,(*this),alpha);
+    //newBone->Render(gameWindow,states,(*this),0.f);
+    SceneGraph.Render(gameWindow,states,(*this),alpha);
 	debugInfo.RenderJoints(gameWindow,states,world);
 
 	gameWindow.setView(gameWindow.getDefaultView());
 	gameWindow.draw(debugInfo);
     debugInfo.updateFPS();
-
 	gameWindow.display();
 
 }
