@@ -32,13 +32,16 @@ void Game::createWorld()
 {
 
 	Bone::Ptr aArm(new Bone(3.0f,-15.0f,80.0f));
+	Bone::Ptr cArm(new Bone(9.0f,-15.0f,80.0f));
 	aArm->AttachSkin(1.5f,skinTexture);
+
+	cArm->AttachSkin(1.0f,skinTexture);
 	Bone::Ptr bArm(new Bone(5.0f,-89.f,89.f));
-	bArm->SetShading(200.f);
-	
+
 	bArm->AttachSkin(1.0f,skinTexture);
+	bArm->AttachSkeletalComponent(std::move(cArm));
 	aArm->AttachSkeletalComponent(std::move(bArm));
-	
+
 
 
 	SceneGraph.AttachChild(std::move(aArm));

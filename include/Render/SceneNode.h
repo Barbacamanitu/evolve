@@ -11,8 +11,8 @@ public:
 	typedef std::unique_ptr<SceneNode> Ptr;
 	void Render(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation);
 	void Update(float delta);
-	sf::Transform SceneNode::getWorldTransform() const;
-	sf::Vector2f SceneNode::getWorldPosition() const;
+	sf::Transform getWorldTransform() const;
+	sf::Vector2f getWorldPosition() const;
 	void AttachChild(Ptr child);
 	Ptr  DetachChild(const SceneNode& node);
 	sf::FloatRect getBoundingRect() const;

@@ -1,5 +1,5 @@
-#include <Render\RenderMath.h>
-#include <Math\eMath.h>
+#include <Render/RenderMath.h>
+#include <Math/eMath.h>
 RenderMath::RenderMath()
 {
     //ctor
@@ -55,15 +55,15 @@ float RenderMath::InterpolateAngles(float oldAngle,float newAngle, float interpo
 
 sf::ConvexShape RenderMath::CreateBoneShape(float length,float thickness)
 {
-	
+
 	float radius = thickness / 2.f;
-	
+
 	sf::ConvexShape rect(39);
 	//Start with top left rectangle point
 	sf::Vector2f topLeft(0.f,-radius);
 	sf::Vector2f bottomRight(length,radius);
 	int currentPoint = 0;
-	
+
 	//rect.append(sf::Vertex(topLeft,color));
 
 	//Add left circle half

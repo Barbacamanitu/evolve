@@ -3959,7 +3959,7 @@
 1387550942 source:/home/russ/dev/git/evolve/main.cpp
 	<Game.h>
 
-1388006575 /home/russ/dev/git/evolve/include/Game.h
+1388122062 /home/russ/dev/git/evolve/include/Game.h
 	<Timing/Timestep.h>
 	<SFML/Graphics.hpp>
 	<Debug/DebugInfo.h>
@@ -3974,7 +3974,7 @@
 1387550942 /home/russ/dev/git/evolve/include/Debug/DebugInfo.h
 	<SFML/Graphics.hpp>
 
-1388018284 /home/russ/dev/git/evolve/include/Render/SceneNode.h
+1388122161 /home/russ/dev/git/evolve/include/Render/SceneNode.h
 	<memory>
 	<SFML/Graphics.hpp>
 
@@ -3990,22 +3990,24 @@
 	<Render/SceneNode.h>
 	<SFML/Graphics.hpp>
 
-1388019759 source:/home/russ/dev/git/evolve/src/Game.cpp
+1388122822 source:/home/russ/dev/git/evolve/src/Game.cpp
 	"Game.h"
-	<Organism/Organism.h>
 	<memory>
+	<Organism/Hub.h>
 
-1385853311 source:/home/russ/dev/git/evolve/src/Render/RenderMath.cpp
-	"RenderMath.h"
+1388122439 source:/home/russ/dev/git/evolve/src/Render/RenderMath.cpp
+	<Render/RenderMath.h>
+	<Math/eMath.h>
 
-1385853310 /home/russ/dev/git/evolve/include/Render/RenderMath.h
+1388122062 /home/russ/dev/git/evolve/include/Render/RenderMath.h
 	<SFML/Graphics.hpp>
 
-1388018320 source:/home/russ/dev/git/evolve/src/Render/SceneNode.cpp
+1388122062 source:/home/russ/dev/git/evolve/src/Render/SceneNode.cpp
 	<Render/SceneNode.h>
 	<assert.h>
+	<Render/RenderMath.h>
 
-1387550942 source:/home/russ/dev/git/evolve/src/Timing/Timestep.cpp
+1388122062 source:/home/russ/dev/git/evolve/src/Timing/Timestep.cpp
 	<Timing/Timestep.h>
 	<math.h>
 
@@ -4214,9 +4216,10 @@
 1387550942 /home/russ/dev/git/evolve/include/Organism/JointDefinition.h
 	<Math/eMath.h>
 
-1387550942 /home/russ/dev/git/evolve/include/Math/eMath.h
+1388122062 /home/russ/dev/git/evolve/include/Math/eMath.h
 	"Vec2.h"
 	"Conversions.h"
+	"Geometry.h"
 
 1387550942 /home/russ/dev/git/evolve/include/Math/Conversions.h
 	<string>
@@ -4228,26 +4231,32 @@
 	<memory>
 	"Bodypart.h"
 
-1388019713 source:/home/russ/dev/git/evolve/src/Organism/Bone.cpp
+1388122062 source:/home/russ/dev/git/evolve/src/Organism/Bone.cpp
 	"Bone.h"
+	<Game.h>
+	<Math/eMath.h>
+	<Render/RenderMath.h>
 
-1388019944 /home/russ/dev/git/evolve/include/Organism/Bone.h
+1388122062 /home/russ/dev/git/evolve/include/Organism/Bone.h
 	"SkeletalComponent.h"
 	<Math/eMath.h>
 	<memory>
 
-1388020224 /home/russ/dev/git/evolve/include/Organism/SkeletalComponent.h
+1388122062 /home/russ/dev/git/evolve/include/Organism/SkeletalComponent.h
 	<SFML/Graphics.hpp>
 	<Render/SceneNode.h>
 	<memory>
 
-1388005600 source:/home/russ/dev/git/evolve/src/Organism/Hub.cpp
+1388122062 source:/home/russ/dev/git/evolve/src/Organism/Hub.cpp
 	"Hub.h"
+	<Math/eMath.h>
 
-1388005860 /home/russ/dev/git/evolve/include/Organism/Hub.h
+1388122062 /home/russ/dev/git/evolve/include/Organism/Hub.h
 	<SkeletalComponent.h>
+	<SFML/Graphics.hpp>
+	"Bone.h"
 
-1388020224 source:/home/russ/dev/git/evolve/src/Organism/SkeletalComponent.cpp
+1388122062 source:/home/russ/dev/git/evolve/src/Organism/SkeletalComponent.cpp
 	"SkeletalComponent.h"
 
 1387550942 source:/home/russ/dev/git/evolve/src/Math/Conversions.cpp
@@ -4255,4 +4264,10 @@
 
 1387550942 source:/home/russ/dev/git/evolve/src/Math/Vec2.cpp
 	"Vec2.h"
+
+1388122062 /home/russ/dev/git/evolve/include/Math/Geometry.h
+
+1388122062 source:/home/russ/dev/git/evolve/src/Math/Geometry.cpp
+	"Geometry.h"
+	<cmath>
 
