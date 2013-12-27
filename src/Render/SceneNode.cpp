@@ -1,9 +1,11 @@
 #include <Render/SceneNode.h>
 #include <assert.h>
-
+#include <Render/RenderMath.h>
 SceneNode::SceneNode(void)
 {
 	mParent = nullptr;
+	pPosition = getPosition();
+	pRotation = getRotation();
 }
 
 
@@ -51,7 +53,8 @@ SceneNode::Ptr SceneNode::DetachChild(const SceneNode& node)
 void SceneNode::Render(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation)
 {
 
-    states.transform *= getTransform();
+    //states.transform *= getTransform();
+	states.transform *= RenderMath::InterpolateTransforms(pPosition,getPosition(),pRotation,getRotation(),getScale(),getScale(),interpolation);
     RenderChildren(target,states,game,interpolation);
     RenderSelf(target,states,game,interpolation);
 }
@@ -66,6 +69,8 @@ void SceneNode::RenderChildren(sf::RenderTarget &target, sf::RenderStates states
 
 void SceneNode::Update(float delta)
 {
+	pPosition = getPosition();
+	pRotation = getRotation();
     UpdateChildren(delta);
     UpdateSelf(delta);
 }

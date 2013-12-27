@@ -31,13 +31,21 @@ class SkeletalComponent : public SceneNode
 
 {
     public:
+		typedef std::unique_ptr<SkeletalComponent> Ptr;
         SkeletalComponent();
         virtual ~SkeletalComponent();
 		virtual void AttachSkin(float thickness){};
+		void ApplyRotation(float amount);
+		std::vector<SkeletalComponent::Ptr> mChildren;
 
     protected:
+		float angularSpeed;
+		float mLowerConstraint;
+		float mUpperConstraint;
+		float mDrag;
     private:
 
+		
 
 };
 

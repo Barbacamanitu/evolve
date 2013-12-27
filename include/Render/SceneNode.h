@@ -26,6 +26,8 @@ protected:
 private:
     void RenderChildren(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation);
     void UpdateChildren(float delta);
+	sf::Vector2f pPosition;
+	float pRotation;
 
 };
 #endif

@@ -81,6 +81,7 @@
     <ClCompile Include="src\debug\DebugInfo.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\math\Conversions.cpp" />
+    <ClCompile Include="src\Math\Geometry.cpp" />
     <ClCompile Include="src\Math\Vec2.cpp" />
     <ClCompile Include="src\Organism\Bone.cpp" />
     <ClCompile Include="src\Organism\Hub.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\math\Conversions.h" />
     <ClInclude Include="include\Math\eMath.h" />
+    <ClInclude Include="include\Math\Geometry.h" />
     <ClInclude Include="include\Math\Vec2.h" />
     <ClInclude Include="include\Organism\Bone.h" />
     <ClInclude Include="include\Organism\Hub.h" />

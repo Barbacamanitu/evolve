@@ -24,7 +24,6 @@ void Hub::AttachBone(Bone::Ptr child,float angle)
 	float rad = evolve::Conversions::DegreesToRadians(angle);
 	//Find attachment position
 	sf::Vector2f aPos(cos(rad) * mRadius,sin(rad) * mRadius);
-	child->SetConstraints(angle,child->GetRange());
 	child->setPosition(aPos);
 	child->setRotation(angle);
 	AttachChild(std::move(child));
