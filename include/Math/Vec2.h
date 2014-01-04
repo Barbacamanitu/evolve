@@ -14,6 +14,13 @@ namespace evolve
 		Vec2(b2Vec2& bVec);
 		Vec2(sf::Vector2f& sfVec);
 
+
+		double ToRadians();
+
+		float DistanceTo(Vec2 other);
+		Vec2& Normalize();
+		float Magnitude();
+
 		Vec2 operator+(const Vec2& other);
 		Vec2 operator-(const Vec2& other);
 		Vec2 operator*(const float scalar);
@@ -25,6 +32,7 @@ namespace evolve
 		Vec2& operator/=(const float scalar);
 
 		~Vec2(void);
+		
 
 
 		float X;

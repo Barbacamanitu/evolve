@@ -48,7 +48,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Development\SFML-2.1-msvc\SFML-2.1\include;C:\Development\Box2D_v2.3.0\Box2D;include;include\Timing;include\Render;include\Organism;include\Math;include\Debug</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Development\SFML-2.1-msvc\SFML-2.1\include;C:\Development\Box2D_v2.3.0\Box2D;include;include\Timing;include\Render;include\Organism;include\Math;include\Math\IK;include\Debug</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
@@ -64,7 +64,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>C:\Development\SFML-2.1-msvc\SFML-2.1\include;C:\Development\Box2D_v2.3.0\Box2D;include;include\Timing;include\Render;include\Organism;include\Math;include\Debug</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Development\SFML-2.1-msvc\SFML-2.1\include;C:\Development\Box2D_v2.3.0\Box2D;include;include\Timing;include\Render;include\Organism;include\Math;include\Math\IK;include\Debug</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
@@ -82,10 +82,16 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\math\Conversions.cpp" />
     <ClCompile Include="src\Math\Geometry.cpp" />
+    <ClCompile Include="src\Math\IK\CCDSolver.cpp" />
+    <ClCompile Include="src\Math\IK\CCDWorldBone.cpp" />
+    <ClCompile Include="src\Math\Transform.cpp" />
     <ClCompile Include="src\Math\Vec2.cpp" />
     <ClCompile Include="src\Organism\Bone.cpp" />
+    <ClCompile Include="src\Organism\Brain.cpp" />
     <ClCompile Include="src\Organism\Hub.cpp" />
+    <ClCompile Include="src\Organism\Organism.cpp" />
     <ClCompile Include="src\Organism\SkeletalComponent.cpp" />
+    <ClCompile Include="src\Organism\SkeletalPhysicsComponent.cpp" />
     <ClCompile Include="src\render\RenderMath.cpp" />
     <ClCompile Include="src\render\Scene.cpp" />
     <ClCompile Include="src\render\SceneNode.cpp" />
@@ -98,10 +104,16 @@
     <ClInclude Include="include\math\Conversions.h" />
     <ClInclude Include="include\Math\eMath.h" />
     <ClInclude Include="include\Math\Geometry.h" />
+    <ClInclude Include="include\Math\IK\CCDSolver.h" />
+    <ClInclude Include="include\Math\IK\CCDWorldBone.h" />
+    <ClInclude Include="include\Math\Transform.h" />
     <ClInclude Include="include\Math\Vec2.h" />
     <ClInclude Include="include\Organism\Bone.h" />
+    <ClInclude Include="include\Organism\Brain.h" />
     <ClInclude Include="include\Organism\Hub.h" />
+    <ClInclude Include="include\Organism\Organism.h" />
     <ClInclude Include="include\Organism\SkeletalComponent.h" />
+    <ClInclude Include="include\Organism\SkeletalPhysicsComponent.h" />
     <ClInclude Include="include\render\RenderMath.h" />
     <ClInclude Include="include\render\Scene.h" />
     <ClInclude Include="include\render\SceneNode.h" />

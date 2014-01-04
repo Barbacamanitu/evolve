@@ -13,13 +13,39 @@ SceneNode::~SceneNode(void)
 {
 }
 
+SceneNode* SceneNode::GetParent() const
+{
+	return mParent;
+}
+
+void SceneNode::SetParent(SceneNode* parent)
+{
+	mParent = parent;
+}
+
+SceneNode* SceneNode::GetChild(int index)
+{
+	
+	SceneNode* child = nullptr;
+	if (mChildren.size() > 0)
+	{
+		child = mChildren[index].get();
+	}
+	return child;
+}
+
+int SceneNode::ChildCount()
+{
+	return mChildren.size();
+}
+
+
 sf::Transform SceneNode::getWorldTransform() const
 {
     sf::Transform transform = sf::Transform::Identity;
 
-    for (const SceneNode* node = this;node != nullptr; node = node->mParent)
+	for (const SceneNode* node = this;node != nullptr; node = node->GetParent())
     transform = node->getTransform() * transform;
-
   return transform;
 }
 
@@ -53,18 +79,22 @@ SceneNode::Ptr SceneNode::DetachChild(const SceneNode& node)
 void SceneNode::Render(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation)
 {
 
-    //states.transform *= getTransform();
-	states.transform *= RenderMath::InterpolateTransforms(pPosition,getPosition(),pRotation,getRotation(),getScale(),getScale(),interpolation);
+    states.transform *= getTransform();
+	//states.transform *= RenderMath::InterpolateTransforms(pPosition,getPosition(),pRotation,getRotation(),getScale(),getScale(),interpolation);
     RenderChildren(target,states,game,interpolation);
     RenderSelf(target,states,game,interpolation);
 }
 
 void SceneNode::RenderChildren(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation)
 {
-    for (const Ptr& node : mChildren)
+	/*for (const Ptr& node : *GetChildren())
     {
         node->Render(target,states,game,interpolation);
-    }
+    }*/
+	for (int i = 0; i < ChildCount(); i++)
+	{
+		GetChild(i)->Render(target,states,game,interpolation);
+	}
 }
 
 void SceneNode::Update(float delta)
@@ -77,8 +107,8 @@ void SceneNode::Update(float delta)
 
 void SceneNode::UpdateChildren(float delta)
 {
-    for (const Ptr& node : mChildren)
-    {
-        node->Update(delta);
-    }
+  for (int i = 0; i < ChildCount(); i++)
+	{
+		GetChild(i)->Update(delta);
+	}
 }

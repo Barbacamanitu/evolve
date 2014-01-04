@@ -2,12 +2,14 @@
 #include <Game.h>
 #include <Math/eMath.h>
 #include <Render/RenderMath.h>
+#include "Hub.h"
 Bone::Bone(float length, float lowerConstraint, float upperConstraint)
 {
+	canControl = false;
     //ctor
     mLength = length;
-	mLowerConstraint = lowerConstraint;
-	mUpperConstraint = upperConstraint;
+	SetConstraints(evolve::Vec2(lowerConstraint,upperConstraint));
+	setRotation(evolve::Geometry::InterpolateAngles(lowerConstraint,upperConstraint,.5f));
     debugRect.setSize(sf::Vector2f(mLength,0.1f));
     debugRect.setOrigin(sf::Vector2f(0.f,.05f));
     debugRect.setFillColor(sf::Color::White);
@@ -18,30 +20,50 @@ Bone::Bone(float length, float lowerConstraint, float upperConstraint)
     debugCirc.setRadius(dcRadius);
     debugCirc.setFillColor(sf::Color::Green);
     debugCirc.setOrigin(sf::Vector2f(dcRadius,dcRadius));
-	setRotation(evolve::Geometry::InterpolateAngles(lowerConstraint,upperConstraint,.5f));
+	
+}
+float Bone::AngleClosestToPoint(evolve::Vec2 target)
+{
+	evolve::Vec2 endPoint = GetEndpoint();
+	evolve::Vec2 curToTar = target - endPoint;
+return 0;
 }
 
-void Bone::SetShading(float amount)
+evolve::Vec2 Bone::GetEndpoint()
 {
-	sf::Color shade = sf::Color::Black;
-	shade.a = amount;
-	mSkin.setFillColor(shade);
+	sf::Transform m = getWorldTransform();
+	sf::Vector2f mm = m.translate(mLength,0) * sf::Vector2f();
+	return evolve::Vec2(mm);
 }
 
-void Bone::SetConstraints(float lowerConstraint, float upperConstraint)
+evolve::Vec2 Bone::GetEndpoint(const sf::Transform& worldTrans)
 {
-	mLowerConstraint = lowerConstraint;
-	mUpperConstraint = upperConstraint;
+	sf::Transform m = worldTrans;
+	sf::Vector2f mm = m.translate(mLength,0) * sf::Vector2f();
+	return evolve::Vec2(mm);
+}
+
+
+
+
+
+
+void Bone::RenderSelf(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation)
+{
+	target.draw(*mSkin,states);
+	debugCirc.setPosition(GetEndpoint().toSFML());
+	//target.draw(debugCirc);
 }
 
 void Bone::AttachSkeletalComponent(SkeletalComponent::Ptr child)
 {
-	//Attach at the correct point.
-	float rot = child->getRotation();
-	child->setPosition(mLength,0.f);
-	child->setRotation(rot);
-
-	AttachChild(std::move(child));
+	float oldRotation = getRotation();
+	setRotation(0);
+	child->move(mLength,0);
+	setRotation(oldRotation);
+	mChildren.clear();
+	child->SetSkeletalParent(this);
+	mChildren.push_back(std::move(child));
 }
 
 
@@ -50,84 +72,29 @@ Bone::~Bone()
     //dtor
 }
 
-sf::FloatRect Bone::getBoundingRect() const
-{
-    return getWorldTransform()
-		.transformRect(mSkin.getGlobalBounds());
-}
-
-void Bone::RenderSelf(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation)
-{
-
-	target.draw(mSkin,states);
-
-
-		
-	sf::FloatRect fR = getBoundingRect();
-	sf::RectangleShape aabb(sf::Vector2f(fR.width,fR.height));
-	aabb.setPosition(fR.left,fR.top);
-	aabb.setFillColor(sf::Color::Transparent);
-	aabb.setOutlineColor(sf::Color::Green);
-	aabb.setOutlineThickness(.1f);
-	
-	/*
-	target.draw(debugRect,states);
-	target.draw(debugCirc,states);
-	target.draw(aabb,sf::RenderStates());*/
-}
 
 void Bone::UpdateSelf(float delta)
 {
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) && canControl)
 	{
-		ApplyRotation(((rand() % 200) - 100) * 10.f);
+		float force = (rand() % 600) + 300;
+		if (rand() % 10 > 5)
+			force *= -1.f;
+		ApplyForce(force);
 	}
-
-	if (angularSpeed > 100)
-		angularSpeed = 100;
-	if (angularSpeed < -100)
-		angularSpeed = -100;
-
-
-
-	if (abs(angularSpeed) > 0)
-	{
-	//Apply drag
-	angularSpeed -= (mDrag * angularSpeed) * delta;
-	if (abs(angularSpeed) < 0.2f)
-		angularSpeed = 0.f;
-	}
-	CheckConstraints(delta);
-	rotate(angularSpeed * delta);
+	
 }
 
 
 
 void Bone::AttachSkin(float thickness,sf::Texture* tex)
 {
-	mSkin = RenderMath::CreateBoneShape(mLength,thickness);
+	mSkin = new sf::ConvexShape(RenderMath::CreateBoneShape(mLength,thickness));
 	//mSkin.setFillColor(sf::Color::White);
-	mSkin.setTexture(tex,false);
-	mSkin.setTextureRect(sf::IntRect(0, 0, 200, 200));
+	mSkin->setTexture(tex,false);
+	mSkin->setTextureRect(sf::IntRect(0, 0, 200, 200));
 }
 
-void Bone::CheckConstraints(float delta)
-{
-	//Check if current angle is within constraints
-	//Range is the distance from the centerAngle that each joint is allowed to move
-	float newAngle = getRotation();
-	newAngle +=  (angularSpeed * delta);
-	if(!evolve::Geometry::IsAngleInRange(newAngle,mLowerConstraint,mUpperConstraint))
-		HitConstraint();
-}
 
-void Bone::HitConstraint()
-{
-	angularSpeed *= -.3f;
-	if (mChildren.size() > 0)
-	{
-		mChildren[0]->ApplyRotation(angularSpeed * -50.3f);
-	}
-		
-}
+

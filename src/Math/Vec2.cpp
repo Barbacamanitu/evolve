@@ -32,6 +32,31 @@ evolve::Vec2::Vec2(sf::Vector2f& sfVec)
 }
 
 
+double evolve::Vec2::ToRadians()
+{
+	Vec2 simple(X,Y);
+	simple.Normalize();
+	return atan2(simple.X,simple.Y);
+}
+
+float evolve::Vec2::DistanceTo(Vec2 other)
+{
+	return sqrt(pow(other.X - X,2) + pow(other.Y - Y,2));
+}
+
+evolve::Vec2& evolve::Vec2::Normalize()
+{
+	
+	return *this /= Magnitude();
+}
+
+float evolve::Vec2::Magnitude()
+{
+	 return sqrt((X * X) + (Y * Y));
+}
+
+
+
 //Operator overloads
 evolve::Vec2 evolve::Vec2::operator+(const Vec2& other)
 {

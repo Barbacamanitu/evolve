@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <memory>
 #include <Organism/Hub.h>
+#include <Organism/Organism.h>
 Game::Game()
 {
     //ctors
@@ -30,19 +31,74 @@ void Game::createWindow()
 
 void Game::createWorld()
 {
+	SceneGraph = new SceneNode();
 
-	Bone::Ptr aArm(new Bone(3.0f,-15.0f,80.0f));
-	aArm->AttachSkin(1.5f,skinTexture);
-	Bone::Ptr bArm(new Bone(5.0f,-89.f,89.f));
-	bArm->SetShading(200.f);
+	Organism::Ptr mOrganism(new Organism());
 	
-	bArm->AttachSkin(1.0f,skinTexture);
-	aArm->AttachSkeletalComponent(std::move(bArm));
+	Bone::Ptr uArm(new Bone(6.f,0,180.f));
+	Bone::Ptr lArm(new Bone(5.f,0,180.f));
+	Hub::Ptr wrist(new Hub(.5f,-35.f,35.f));
+	
+	uArm->canControl = true;
+
+	uArm->SetID(1);
+	lArm->SetID(2);
+	wrist->SetID(3);
 	
 
+	uArm->AttachSkin(.8f,skinTexture);
+	lArm->AttachSkin(.5f,skinTexture);
+	wrist->AttachSkin(.01,skinTexture);
 
-	SceneGraph.AttachChild(std::move(aArm));
+	
+	
+	for (int i = 0; i < 5; i++)
+	{
+		float foo[5];
+		foo[0] = -45;
+		foo[1] = -22.5;
+		foo[2] = 0;
+		foo[3] = 22.5;
+		foo[4] = 45;
+		Bone::Ptr fA(new Bone(.6f,-40.f,40.f));
+		Bone::Ptr fB(new Bone(.5f,-30.f,30.f));
+		fA->AttachSkin(.1f,skinTexture);
+		fB->AttachSkin(.1f,skinTexture);
+		
+		int ID = (i + 1) * 100;
+		fA->SetID(ID);
+		fB->SetID(ID + 1);
 
+
+		fA->AttachSkeletalComponent(std::move(fB));
+		wrist->AttachBone(std::move(fA),foo[i]);
+	}
+
+
+
+
+	lArm->AttachSkeletalComponent(std::move(wrist));
+	uArm->AttachSkeletalComponent(std::move(lArm));
+
+	uArm->SetOrganism(mOrganism.get());
+	mOrganism->AttachSkeletalComponent(std::move(uArm));
+	mOrganism->SetGame(this);
+	SceneGraph->AttachChild(std::move(mOrganism));
+
+}
+
+sf::RenderWindow* Game::GetWindow()
+{
+	return &gameWindow;
+}
+
+evolve::Vec2 Game::GetMouseWorldPosition()
+{
+	
+	sf::Vector2i pixelPos = sf::Mouse::getPosition(gameWindow);
+	// convert it to world coordinates
+	sf::Vector2f worldPos = gameWindow.mapPixelToCoords(pixelPos,mainView);
+	return evolve::Vec2(worldPos);
 }
 
 void Game::mainLoop()
@@ -69,7 +125,7 @@ void Game::render(const float alpha)
     sf::RenderStates states;
 	gameWindow.setView(mainView);
     //newBone->Render(gameWindow,states,(*this),0.f);
-    SceneGraph.Render(gameWindow,states,(*this),alpha);
+    SceneGraph->Render(gameWindow,states,(*this),alpha);
 
 	gameWindow.setView(gameWindow.getDefaultView());
 	gameWindow.draw(debugInfo);
@@ -80,7 +136,7 @@ void Game::render(const float alpha)
 
 void Game::update(const float dt)
 {
-
+	
 	int32 velocityIterations = 8;   //how strongly to correct velocity
     int32 positionIterations = 3;
 	//world->Step( dt, velocityIterations, positionIterations);
@@ -111,7 +167,7 @@ void Game::update(const float dt)
 	oldMouse = newMouse;
 
 
-	SceneGraph.Update(dt);
+	SceneGraph->Update(dt);
 }
 
 

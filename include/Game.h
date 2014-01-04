@@ -21,6 +21,8 @@ class Game
 		void createWorld();
 		Bone* newBone;
 		sf::Texture* skinTexture;
+		sf::RenderWindow* GetWindow();
+		evolve::Vec2 GetMouseWorldPosition();
     protected:
     private:
         sf::RenderWindow gameWindow;
@@ -29,8 +31,7 @@ class Game
         DebugInfo debugInfo;
 		sf::Vector2i oldMouse;
 		sf::View mainView;
-
-        SceneNode SceneGraph;
+        SceneNode * SceneGraph;
 
 
 };

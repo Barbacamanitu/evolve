@@ -1,9 +1,11 @@
 #ifndef SKELETALCOMPONENT_H
 #define SKELETALCOMPONENT_H
 #include  <SFML/Graphics.hpp>
-#include <Render/SceneNode.h>
+#include <Math/eMath.h>
 #include <memory>
-
+#include <Render/SceneNode.h>
+class Game;
+class Organism;
 class SkeletalComponent : public SceneNode
 /*
     SkeletalComponent derives from SceneNode to simplify DebugDrawing.
@@ -34,19 +36,68 @@ class SkeletalComponent : public SceneNode
 		typedef std::unique_ptr<SkeletalComponent> Ptr;
         SkeletalComponent();
         virtual ~SkeletalComponent();
-		virtual void AttachSkin(float thickness){};
-		void ApplyRotation(float amount);
-		std::vector<SkeletalComponent::Ptr> mChildren;
+		
+		void SetConstraints(evolve::Vec2 constraints);
 
-    protected:
-		float angularSpeed;
-		float mLowerConstraint;
-		float mUpperConstraint;
-		float mDrag;
-    private:
+		void SetSkeletalParent(SkeletalComponent* parent);
+		SkeletalComponent* GetSkeletalParent() const;
+
+		virtual void AttachSkin(float thickness){};
+
+		void Update(float delta);
+		
+		Organism* GetOrganism()
+		{
+			return mOrganism;
+		}
+		void SetOrganism(Organism* organism);
 
 		
+		
+		SkeletalComponent* GetChild(int index);
+		int ChildCount();
 
+		void SetID(int id);
+		int GetID();
+		SkeletalComponent* GetSkeletalComponentByID(int id);
+
+		void ApplyForce(float amount);
+		void RecursiveApplyForce(float amount);
+		void SetTargetAngle(float angle);
+		void SetAnglePercentage(float percentage);
+
+		virtual evolve::Vec2 GetEndpoint(){return evolve::Vec2(getWorldPosition());};
+		virtual evolve::Vec2 GetEndpoint(const sf::Transform& worldTrans){return worldTrans * sf::Vector2f();};
+		evolve::Vec2 GetConstraints();
+		
+    protected:
+		void ApplyDrag(float delta);
+		void CheckConstraints(float delta);
+		void HitConstraint();
+		float mDrag;
+		sf::Shape * mSkin;
+		std::vector<SkeletalComponent::Ptr> mChildren;
+		SkeletalComponent* sParent;
+		virtual void RenderSelf(sf::RenderTarget &target, sf::RenderStates states,Game &game,float interpolation);
+
+private:
+		
+	//Rotation Related Methods
+	void RotateTowardsTarget(float delta);
+	void Stop(float speed);
+	void UpdateSpeed(float delta);
+
+
+	//Private Data Members
+	int mID;
+	float mMaxSpeed;		
+	float mTargetAngle;
+	float mAngularSpeed;
+	
+
+	evolve::Vec2 mConstraints;	
+	Organism* mOrganism;
+		
 };
 
 #endif // SKELETALCOMPONENT_H
